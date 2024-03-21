@@ -11,10 +11,10 @@ def minOperations(n):
     Returns:
         Number of minimum operations
     """
+
     current = 1
     start = 0
     counter = 0
-    
     while current < n:
         remainder = n - current
         if remainder % current == 0:
@@ -24,5 +24,4 @@ def minOperations(n):
         else:
             current += start
             counter += 1
-    
     return counter
