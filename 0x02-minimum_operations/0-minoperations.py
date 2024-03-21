@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""  Determines the number of minmum operations given n characters """
+
+
 def minOperations(n):
     if n == 1:
         return 0
