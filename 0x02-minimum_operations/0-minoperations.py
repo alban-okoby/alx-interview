@@ -1,17 +1,28 @@
 #!/usr/bin/python3
-"""  Determines the number of minmum operations given n characters """
+"""  Determines the number of minmum operations given n chars"""
 
 
 def minOperations(n):
-    if n == 1:
-        return 0
-
-    dp = [float('inf')] * (n + 1)
-    dp[1] = 0
-
-    for i in range(2, n + 1):
-        for j in range(1, i):
-            if i % j == 0:
-                dp[i] = min(dp[i], dp[j] + (i // j))
-
-    return dp[n] if dp[n] != float('inf') else 0
+    """
+    A function that calculates the fewest number of operations
+    needed to give a result of exactly n H characters in a file
+    Args:
+        n: Number of characters to be displayed
+    Returns:
+        Number of minimum operations
+    """
+    current = 1
+    start = 0
+    counter = 0
+    
+    while current < n:
+        remainder = n - current
+        if remainder % current == 0:
+            start = current
+            current += start
+            counter += 2
+        else:
+            current += start
+            counter += 1
+    
+    return counter
