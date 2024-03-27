@@ -5,7 +5,8 @@ import signal
 import sys
 
 total_file_size = 0
-status_code_counts = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+status_code_counts = {
+        200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
 line_count = 0
 
 
@@ -13,11 +14,13 @@ def signal_handler(sig, frame):
     print_stats()
     sys.exit(0)
 
+
 def print_stats():
     print(f"File size: {total_file_size}")
     for status_code, count in sorted(status_code_counts.items()):
         if count > 0:
             print(f"{status_code}: {count}")
+
 
 signal.signal(signal.SIGINT, signal_handler)
 
