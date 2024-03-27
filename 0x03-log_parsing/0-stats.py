@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+"""Read stdin line by line and computes metrics"""
 
 import signal
 import sys
