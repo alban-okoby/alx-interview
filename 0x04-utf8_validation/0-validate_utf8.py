@@ -5,26 +5,28 @@ Validate utf-8
 
 
 def validUTF8(data):
-    def is_continuation(byte):
-        return (byte & 0b11000000) == 0b10000000
+    num_bytes = 0
+    mask1 = 1 << 7
+    mask2 = 1 << 6
 
-    i = 0
-    while i < len(data):
-        num_bytes = 1
-        leading_bits = data[i]
+    for byte in data:
+        mask_byte = 1 << 7
 
-        for j in range(7, 1, -1):
-            if leading_bits & (1 << j) == 0:
-                break
-            num_bytes += 1
+        if num_bytes == 0:
+            while mask_byte & byte:
+                num_bytes += 1
+                mask_byte >>= 1
 
-        if num_bytes == 1:
-            i += 1
-            continue
+            if num_bytes == 0:
+                continue
 
-        for j in range(1, num_bytes):
-            if i + j >= len(data) or not is_continuation(data[i + j]):
+            if num_bytes == 1 or num_bytes > 4:
                 return False
-        i += num_bytes
 
-    return True
+        else:
+            if not (byte & mask1 and not (byte & mask2)):
+                return False
+
+        num_bytes -= 1
+
+    return num_bytes == 0
