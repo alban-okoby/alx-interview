@@ -23,12 +23,12 @@ request.get(url, (error, response, body) => {
     return new Promise((resolve, reject) => {
       request.get(characterUrl, (error, response, body) => {
         if (error) {
-          reject(error);
+          reject(new Error(error)); // Modify the rejection reason to be an instance of Error
           return;
         }
 
         if (response.statusCode !== 200) {
-          reject(`Failed to fetch character data. Status code: ${response.statusCode}`);
+          reject(new Error(`Failed to fetch character data. Status code: ${response.statusCode}`)); // Modify the rejection reason to be an instance of Error
           return;
         }
 
@@ -44,7 +44,7 @@ request.get(url, (error, response, body) => {
       try {
         await fetchCharacter(characterUrl);
       } catch (error) {
-        console.error(error);
+        console.error(error.message);
       }
     }
   }
