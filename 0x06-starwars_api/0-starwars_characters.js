@@ -19,16 +19,16 @@ request.get(url, (error, response, body) => {
 
   const charactersArray = JSON.parse(body).characters;
 
-  function fetchCharacter(characterUrl) {
+  function fetchCharacter (characterUrl) {
     return new Promise((resolve, reject) => {
       request.get(characterUrl, (error, response, body) => {
         if (error) {
-          reject(new Error(error)); // Modify the rejection reason to be an instance of Error
+          reject(new Error(error));
           return;
         }
 
         if (response.statusCode !== 200) {
-          reject(new Error(`Failed to fetch character data. Status code: ${response.statusCode}`)); // Modify the rejection reason to be an instance of Error
+          reject(new Error(`Failed to fetch character data. Status code: ${response.statusCode}`));
           return;
         }
 
@@ -39,7 +39,7 @@ request.get(url, (error, response, body) => {
     });
   }
 
-  async function fetchAndPrintCharacters() {
+  async function fetchAndPrintCharacters () {
     for (const characterUrl of charactersArray) {
       try {
         await fetchCharacter(characterUrl);
