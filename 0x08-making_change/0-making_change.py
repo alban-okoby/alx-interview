@@ -4,8 +4,9 @@
 Main program
 """
 
+
 def makeChange(coins, total):
-    """Calculate the fewest number of coins needed to meet the given total amount"""
+    """Calculate the fewest number of coins needed to meet the g"""
     if total <= 0:
         return 0
 
