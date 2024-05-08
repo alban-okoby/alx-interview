@@ -4,21 +4,14 @@
 
 
 def island_perimeter(grid):
-    if not grid:
-        return 0
-
-    rows, cols = len(grid), len(grid[0])
+    """island perimenter function"""
     perimeter = 0
-    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-
-    for r in range(rows):
-        for c in range(cols):
-            if grid[r][c] == 1:
-                for dr, dc in directions:
-                    nr, nc = r + dr, c + dc
-                    if nr < 0 or nr >= rows or nc < 0 or nc >= cols:
-                        perimeter += 1
-                    elif grid[nr][nc] == 0:
-                        perimeter += 1
-
-    return perimeter
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            if grid[i][j] == 1:
+                perimeter += 4
+                if i > 0 and grid[i-1][j] == 1:
+                    perimeter -= 2
+                if j > 0 and grid[i][j-1] == 1:
+                    perimeter -= 2
+    return (perimeter)
